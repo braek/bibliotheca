@@ -4,6 +4,7 @@ dependencies {
     implementation project(':vocabulary')
 
     testImplementation project(':test-doubles')
+    testImplementation project(':queries')
 }
 
 description = 'use-cases'

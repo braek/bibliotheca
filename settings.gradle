@@ -1,4 +1,4 @@
-rootProject.name = 'onion'
+rootProject.name = 'bibliotheca'
 
 include(':acceptance-tests')
 include(':api')
