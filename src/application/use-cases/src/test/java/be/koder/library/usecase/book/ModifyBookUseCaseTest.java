@@ -41,11 +41,13 @@ class ModifyBookUseCaseTest {
         private final Author newAuthor = Author.fromString("The New Author");
         private boolean modifiedCalled;
         private BookId modifiedBookId;
+        private BookSnapshot modifiedBook;
 
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
             useCase.execute(new ModifyBookCommand(book.id(), newTitle, newAuthor), this);
+            modifiedBook = bookRepository.get(book.id()).map(Book::takeSnapshot).orElseThrow();
         }
 
         @Test
@@ -56,6 +58,15 @@ class ModifyBookUseCaseTest {
                 var event = (BookModified) it;
                 assertThat(event.bookId()).isEqualTo(book.id());
             });
+        }
+
+        @Test
+        @DisplayName("it should save the Book")
+        void bookSaved() {
+            assertThat(modifiedBook.id()).isEqualTo(book.id());
+            assertThat(modifiedBook.isbn()).isEqualTo(book.isbn());
+            assertThat(modifiedBook.title()).isEqualTo(newTitle);
+            assertThat(modifiedBook.author()).isEqualTo(newAuthor);
         }
 
         @Test
