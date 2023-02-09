@@ -6,7 +6,6 @@ import be.koder.library.domain.book.BookSnapshot;
 import be.koder.library.domain.book.event.BookModified;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
-import be.koder.library.usecase.book.command.ModifyBookCommand;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Isbn;
@@ -46,7 +45,7 @@ class ModifyBookUseCaseTest {
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
-            useCase.execute(new ModifyBookCommand(book.id(), newTitle, newAuthor), this);
+            useCase.modifyBook(book.id(), newTitle, newAuthor, this);
             modifiedBook = bookRepository.get(book.id()).map(Book::takeSnapshot).orElseThrow();
         }
 
@@ -88,7 +87,6 @@ class ModifyBookUseCaseTest {
         }
     }
 
-
     @Nested
     @DisplayName("when non-existing Book is modified")
     class TestNonExistingBook implements ModifyBookPresenter {
@@ -97,7 +95,7 @@ class ModifyBookUseCaseTest {
 
         @BeforeEach
         void setup() {
-            useCase.execute(new ModifyBookCommand(BookId.createNew(), Title.fromString("The Title"), Author.fromString("The Author")), this);
+            useCase.modifyBook(BookId.createNew(), Title.fromString("The Title"), Author.fromString("The Author"), this);
         }
 
         @Test

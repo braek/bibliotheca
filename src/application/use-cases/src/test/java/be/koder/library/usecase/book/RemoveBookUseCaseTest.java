@@ -6,7 +6,6 @@ import be.koder.library.domain.book.BookSnapshot;
 import be.koder.library.domain.book.event.BookRemoved;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
-import be.koder.library.usecase.book.command.RemoveBookCommand;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Isbn;
@@ -43,7 +42,7 @@ class RemoveBookUseCaseTest {
                     Title.fromString("The Title"),
                     Author.fromString("The Author")
             )));
-            useCase.execute(new RemoveBookCommand(bookId), this);
+            useCase.removeBook(bookId, this);
         }
 
         @Test
@@ -89,7 +88,7 @@ class RemoveBookUseCaseTest {
 
         @BeforeEach
         void setup() {
-            useCase.execute(new RemoveBookCommand(BookId.createNew()), this);
+            useCase.removeBook(BookId.createNew(), this);
         }
 
         @Test

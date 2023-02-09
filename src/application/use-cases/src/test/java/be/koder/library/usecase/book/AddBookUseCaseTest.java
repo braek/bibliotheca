@@ -6,7 +6,6 @@ import be.koder.library.domain.book.BookSnapshot;
 import be.koder.library.domain.book.event.BookAdded;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
-import be.koder.library.usecase.book.command.AddBookCommand;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Isbn;
@@ -41,7 +40,7 @@ class AddBookUseCaseTest {
 
         @BeforeEach
         void setup() {
-            useCase.execute(new AddBookCommand(isbn, title, author), this);
+            useCase.addBook(isbn, title, author, this);
             savedBook = bookRepository.get(bookId).map(Book::takeSnapshot).orElseThrow();
         }
 
@@ -98,7 +97,7 @@ class AddBookUseCaseTest {
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
-            useCase.execute(new AddBookCommand(book.isbn(), book.title(), book.author()), this);
+            useCase.addBook(book.isbn(), book.title(), book.author(), this);
         }
 
         @Test
