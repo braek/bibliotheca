@@ -87,4 +87,33 @@ class ModifyBookUseCaseTest {
             fail();
         }
     }
+
+
+    @Nested
+    @DisplayName("when non-existing Book is modified")
+    class TestNonExistingBook implements ModifyBookPresenter {
+
+        private boolean bookNotFoundCalled;
+
+        @BeforeEach
+        void setup() {
+            useCase.execute(new ModifyBookCommand(BookId.createNew(), Title.fromString("The Title"), Author.fromString("The Author")), this);
+        }
+
+        @Test
+        @DisplayName("it should provide feedback")
+        void feedbackProvided() {
+            assertTrue(bookNotFoundCalled);
+        }
+
+        @Override
+        public void modified(BookId bookId) {
+            fail();
+        }
+
+        @Override
+        public void bookNotFound() {
+            bookNotFoundCalled = true;
+        }
+    }
 }
