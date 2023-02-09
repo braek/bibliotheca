@@ -89,7 +89,7 @@ class ModifyBookUseCaseTest {
 
     @Nested
     @DisplayName("when non-existing Book is modified")
-    class TestNonExistingBook implements ModifyBookPresenter {
+    class TestWhenNonExistingBookModified implements ModifyBookPresenter {
 
         private boolean bookNotFoundCalled;
 
