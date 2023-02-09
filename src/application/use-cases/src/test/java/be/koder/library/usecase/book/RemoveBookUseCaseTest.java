@@ -3,6 +3,7 @@ package be.koder.library.usecase.book;
 import be.koder.library.api.presenter.RemoveBookPresenter;
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookSnapshot;
+import be.koder.library.domain.book.event.BookRemoved;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
 import be.koder.library.usecase.book.command.RemoveBookCommand;
@@ -43,6 +44,16 @@ class RemoveBookUseCaseTest {
                     Author.fromString("The Author")
             )));
             useCase.execute(new RemoveBookCommand(bookId), this);
+        }
+
+        @Test
+        @DisplayName("it should publish an event")
+        void eventPublished() {
+            assertThat(eventPublisher.getLastEvent()).hasValueSatisfying(it -> {
+                assertThat(it).isInstanceOf(BookRemoved.class);
+                var event = (BookRemoved) it;
+                assertThat(event.bookId()).isEqualTo(bookId);
+            });
         }
 
         @Test
