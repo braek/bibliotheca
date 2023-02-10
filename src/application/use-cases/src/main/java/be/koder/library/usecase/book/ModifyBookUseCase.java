@@ -11,8 +11,6 @@ import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Title;
 
-import static java.util.Objects.requireNonNull;
-
 public final class ModifyBookUseCase implements UseCase<ModifyBookCommand, ModifyBookPresenter>, ModifyBook {
 
     private final BookRepository bookRepository;
@@ -25,10 +23,6 @@ public final class ModifyBookUseCase implements UseCase<ModifyBookCommand, Modif
 
     @Override
     public void modifyBook(BookId bookId, Title title, Author author, ModifyBookPresenter presenter) {
-        requireNonNull(bookId, "ID cannot be NULL");
-        requireNonNull(title, "Title cannot be NULL");
-        requireNonNull(author, "Author cannot be NULL");
-        requireNonNull(presenter, "Presenter cannot be NULL");
         execute(new ModifyBookCommand(bookId, title, author), presenter);
     }
 
