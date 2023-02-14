@@ -37,16 +37,16 @@ public final class Book {
     public void modify(final Title title, final Author author, final EventPublisher eventPublisher) {
         this.title = title;
         this.author = author;
-        eventPublisher.publish(new BookModified(id));
+        eventPublisher.publish(new BookModified(this.id));
     }
 
     public BookSnapshot takeSnapshot() {
         return new BookSnapshot(
-                id,
-                isbn,
-                title,
-                author,
-                hardcover
+                this.id,
+                this.isbn,
+                this.title,
+                this.author,
+                this.hardcover
         );
     }
 
