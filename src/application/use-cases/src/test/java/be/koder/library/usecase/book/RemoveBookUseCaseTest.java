@@ -40,7 +40,8 @@ class RemoveBookUseCaseTest {
                     bookId,
                     Isbn.fromString("0123456789"),
                     Title.fromString("The Title"),
-                    Author.fromString("The Author")
+                    Author.fromString("The Author"),
+                    null
             )));
             useCase.removeBook(bookId, this);
         }

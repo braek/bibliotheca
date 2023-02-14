@@ -1,4 +1,4 @@
-rootProject.name = 'bibliotheca'
+rootProject.name = 'library'
 
 include(':api')
 include(':domain')

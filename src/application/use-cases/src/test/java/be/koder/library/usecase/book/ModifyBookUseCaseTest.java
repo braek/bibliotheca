@@ -4,11 +4,11 @@ import be.koder.library.api.presenter.ModifyBookPresenter;
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookSnapshot;
 import be.koder.library.domain.book.event.BookModified;
+import be.koder.library.test.BookObjectMother;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
-import be.koder.library.vocabulary.book.Isbn;
 import be.koder.library.vocabulary.book.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,12 +30,7 @@ class ModifyBookUseCaseTest {
     @DisplayName("when Book is modified successfully")
     class TestHappyFlow implements ModifyBookPresenter {
 
-        private final BookSnapshot book = new BookSnapshot(
-                BookId.createNew(),
-                Isbn.fromString("1234567890"),
-                Title.fromString("The Title"),
-                Author.fromString("The Author")
-        );
+        private final BookSnapshot book = BookObjectMother.INSTANCE.cleanCode;
         private final Title newTitle = Title.fromString("The New Title");
         private final Author newAuthor = Author.fromString("The New Author");
         private boolean modifiedCalled;

@@ -4,12 +4,10 @@ import be.koder.library.api.presenter.AddBookPresenter;
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookSnapshot;
 import be.koder.library.domain.book.event.BookAdded;
+import be.koder.library.test.BookObjectMother;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
-import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
-import be.koder.library.vocabulary.book.Isbn;
-import be.koder.library.vocabulary.book.Title;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -30,9 +28,7 @@ class AddBookUseCaseTest {
     @DisplayName("when Book is added successfully")
     class TestHappyFlow implements AddBookPresenter {
 
-        private final Title title = Title.fromString("Clean Code: A Handbook of Agile Software Craftsmanship");
-        private final Author author = Author.fromString("Robert C. Martin");
-        private final Isbn isbn = Isbn.fromString("1234567890");
+        private BookSnapshot book = BookObjectMother.INSTANCE.cleanCode;
 
         private boolean addedCalled;
         private BookId bookId;
@@ -40,7 +36,7 @@ class AddBookUseCaseTest {
 
         @BeforeEach
         void setup() {
-            useCase.addBook(isbn, title, author, this);
+            useCase.addBook(book.isbn(), book.title(), book.author(), this);
             savedBook = bookRepository.get(bookId).map(Book::takeSnapshot).orElseThrow();
         }
 
@@ -65,9 +61,10 @@ class AddBookUseCaseTest {
         @DisplayName("it should save the Book")
         void bookSaved() {
             assertThat(savedBook.id()).isEqualTo(bookId);
-            assertThat(savedBook.isbn()).isEqualTo(isbn);
-            assertThat(savedBook.title()).isEqualTo(title);
-            assertThat(savedBook.author()).isEqualTo(author);
+            assertThat(savedBook.isbn()).isEqualTo(book.isbn());
+            assertThat(savedBook.title()).isEqualTo(book.title());
+            assertThat(savedBook.author()).isEqualTo(book.author());
+            assertThat(savedBook.hardcover()).isEqualTo(book.hardcover());
         }
 
         @Override
@@ -87,12 +84,7 @@ class AddBookUseCaseTest {
     class TestWhenIsbnAlreadyExists implements AddBookPresenter {
 
         private boolean isbnAlreadyExistsCalled;
-        private BookSnapshot book = new BookSnapshot(
-                BookId.createNew(),
-                Isbn.fromString("1234567890"),
-                Title.fromString("The Title"),
-                Author.fromString("The Author")
-        );
+        private BookSnapshot book = BookObjectMother.INSTANCE.cleanCode;
 
         @BeforeEach
         void setup() {
