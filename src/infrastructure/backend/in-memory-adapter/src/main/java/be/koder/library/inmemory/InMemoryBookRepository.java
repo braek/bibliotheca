@@ -1,12 +1,10 @@
-package be.koder.library.test;
+package be.koder.library.inmemory;
 
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookRepository;
 import be.koder.library.domain.book.BookSnapshot;
-import be.koder.library.domain.book.service.IsbnService;
 import be.koder.library.query.book.BookArchive;
 import be.koder.library.vocabulary.book.BookId;
-import be.koder.library.vocabulary.book.Isbn;
 import be.koder.library.vocabulary.dto.BookListItem;
 
 import java.util.HashMap;
@@ -14,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public final class MockBookRepository implements BookRepository, IsbnService, BookArchive {
+public final class InMemoryBookRepository implements BookRepository, BookArchive {
 
     private final Map<BookId, BookSnapshot> store = new HashMap<>();
 
@@ -38,17 +36,13 @@ public final class MockBookRepository implements BookRepository, IsbnService, Bo
     }
 
     @Override
-    public boolean exists(Isbn isbn) {
-        return store.values().stream().anyMatch(it -> it.isbn().equals(isbn));
-    }
-
-    @Override
     public List<BookListItem> listBooks() {
         return store.values().stream().map(it -> new BookListItem(
                 it.id(),
                 it.isbn(),
                 it.title(),
                 it.author(),
+                it.hardcover()
         )).toList();
     }
 }

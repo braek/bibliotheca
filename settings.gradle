@@ -16,3 +16,15 @@ project(':queries').projectDir = file('src/application/queries')
 // Misc
 project(':test-doubles').projectDir = file('src/test-doubles')
 project(':vocabulary').projectDir = file('src/vocabulary')
+
+// Backend
+include(':in-memory-adapter')
+project(':in-memory-adapter').projectDir = file('src/infrastructure/backend/in-memory-adapter')
+
+// Frontend
+include(':swing-adapter')
+project(':swing-adapter').projectDir = file('src/infrastructure/frontend/swing-adapter')
+
+// Main
+include(':main')
+project(':main').projectDir = file('src/main')
