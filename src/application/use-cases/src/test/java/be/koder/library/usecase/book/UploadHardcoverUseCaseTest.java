@@ -49,7 +49,7 @@ class UploadHardcoverUseCaseTest {
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
-            uploadHardcover.uploadBookCover(book.id(), filename, data, this);
+            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
             updatedBook = bookRepository.get(book.id()).map(Book::takeSnapshot).orElseThrow();
         }
 
@@ -140,7 +140,7 @@ class UploadHardcoverUseCaseTest {
         @DisplayName("it should provide feedback")
         void feedbackProvided(final String extension) {
             final Filename filename = Filename.fromString(String.format("HardcoverForBook.%s", extension));
-            uploadHardcover.uploadBookCover(book.id(), filename, data, this);
+            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
             assertThat(fileExtensionNotAllowedCalled).isTrue();
         }
 
@@ -183,7 +183,7 @@ class UploadHardcoverUseCaseTest {
 
         @BeforeEach
         void setup() {
-            uploadHardcover.uploadBookCover(BookId.createNew(), Filename.fromString("TheHardcover.jpg"), "ImageBytes".getBytes(), this);
+            uploadHardcover.uploadHardcover(BookId.createNew(), Filename.fromString("TheHardcover.jpg"), "ImageBytes".getBytes(), this);
         }
 
         @Test
@@ -236,7 +236,7 @@ class UploadHardcoverUseCaseTest {
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
             hardcoverStore.enableFail();
-            uploadHardcover.uploadBookCover(book.id(), filename, data, this);
+            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
         }
 
         @Test
@@ -288,7 +288,7 @@ class UploadHardcoverUseCaseTest {
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
-            uploadHardcover.uploadBookCover(book.id(), filename, data, this);
+            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
         }
 
         @Test
@@ -341,7 +341,7 @@ class UploadHardcoverUseCaseTest {
             bookRepository.save(Book.fromSnapshot(book));
             byte[] data = new byte[HardcoverSettings.MAX_FILE_SIZE + 1];
             new Random().nextBytes(data);
-            uploadHardcover.uploadBookCover(book.id(), filename, data, this);
+            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
         }
 
         @Test

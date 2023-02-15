@@ -25,7 +25,7 @@ public final class UploadHardcoverUseCase implements UseCase<UploadBookCoverComm
     }
 
     @Override
-    public void uploadBookCover(final BookId bookId, final Filename filename, final byte[] data, final UploadHardcoverPresenter presenter) {
+    public void uploadHardcover(final BookId bookId, final Filename filename, final byte[] data, final UploadHardcoverPresenter presenter) {
         execute(new UploadBookCoverCommand(bookId, filename, data), presenter);
     }
 

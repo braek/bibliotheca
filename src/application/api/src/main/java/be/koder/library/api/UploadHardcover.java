@@ -5,5 +5,5 @@ import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.file.Filename;
 
 public interface UploadHardcover {
-    void uploadBookCover(BookId bookId, Filename filename, byte[] data, UploadHardcoverPresenter presenter);
+    void uploadHardcover(BookId bookId, Filename filename, byte[] data, UploadHardcoverPresenter presenter);
 }
