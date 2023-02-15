@@ -73,7 +73,7 @@ public final class Book {
             eventPublisher.fileTooLarge();
             return;
         }
-        var response = hardcoverStore.store(String.format("%s.%s", id, filename.getExtension()), data);
+        var response = hardcoverStore.store(String.format("%s.%s", this.id, filename.getExtension()), data);
         if (!response.isOkay()) {
             eventPublisher.uploadFailed(response.getError());
             return;
