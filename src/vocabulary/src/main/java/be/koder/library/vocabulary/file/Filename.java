@@ -9,7 +9,7 @@ import static java.util.Optional.ofNullable;
 public final class Filename {
 
     private final String value;
-    private final String extension;
+    private final Extension extension;
 
     private Filename(final String str) {
         final var sanitized = ofNullable(str)
@@ -20,14 +20,14 @@ public final class Filename {
         }
         this.value = sanitized;
         final var chunks = sanitized.split("\\.");
-        this.extension = chunks[chunks.length - 1].toLowerCase();
+        this.extension = Extension.fromString(chunks[chunks.length - 1]);
     }
 
     public static Filename fromString(final String str) {
         return new Filename(str);
     }
 
-    public String getExtension() {
+    public Extension getExtension() {
         return extension;
     }
 
