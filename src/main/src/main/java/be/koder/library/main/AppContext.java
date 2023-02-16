@@ -14,12 +14,12 @@ import be.koder.library.usecase.book.UploadHardcoverUseCase;
 
 public final class AppContext {
 
-    // Internal kitchen
+    // Internal kitchen: hide from outside world
     private static final InMemoryBookRepository bookRepository = new InMemoryBookRepository();
     private static final InMemoryEventPublisher eventPublisher = new InMemoryEventPublisher();
     private static final InMemoryHardcoverStore hardcoverStore = new InMemoryHardcoverStore();
 
-    // Public API
+    // Public API: to be consumed by frontend adapters
     public static final AddBook addBook = new AddBookUseCase(bookRepository, bookRepository, eventPublisher);
     public static final ModifyBook modifyBook = new ModifyBookUseCase(bookRepository, eventPublisher);
     public static final RemoveBook removeBook = new RemoveBookUseCase(bookRepository, eventPublisher);
