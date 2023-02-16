@@ -49,6 +49,7 @@ public final class MockBookRepository implements BookRepository, IsbnService, Bo
                 it.isbn(),
                 it.title(),
                 it.author(),
+                it.hardcover()
         )).toList();
     }
 }
