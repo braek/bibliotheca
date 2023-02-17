@@ -21,7 +21,7 @@ public final class Book {
     private Author author;
     private URL hardcover;
 
-    private Book(final BookId id, final Isbn isbn, final Title title, final Author author, URL hardcover) {
+    private Book(final BookId id, final Isbn isbn, final Title title, final Author author, final URL hardcover) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
