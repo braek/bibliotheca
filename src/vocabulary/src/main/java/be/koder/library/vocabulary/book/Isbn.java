@@ -14,8 +14,7 @@ public final class Isbn {
         var sanitized = ofNullable(value)
                 .map(String::trim)
                 .orElse(null);
-        var regex = Pattern.compile("^(\\d{10}|\\d{13})$");
-        if (isNull(sanitized) || !regex.matcher(sanitized).matches()) {
+        if (isNull(sanitized) || !Pattern.compile("^(\\d{10}|\\d{13})$").matcher(sanitized).matches()) {
             throw new InvalidIsbnException(value);
         }
         this.value = value;
