@@ -1,11 +1,9 @@
 package be.koder.library.swing;
 
-import be.koder.library.api.AddBook;
-import be.koder.library.api.ModifyBook;
-import be.koder.library.api.RemoveBook;
-import be.koder.library.api.UploadHardcover;
+import be.koder.library.api.*;
 
 public record Facade(
+        ListBooks listBooks,
         AddBook addBook,
         ModifyBook modifyBook,
         RemoveBook removeBook,

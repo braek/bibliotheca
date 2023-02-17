@@ -3,7 +3,7 @@ package be.koder.library.inmemory;
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookRepository;
 import be.koder.library.domain.book.BookSnapshot;
-import be.koder.library.domain.book.service.IsbnService;
+import be.koder.library.domain.book.IsbnService;
 import be.koder.library.query.book.BookArchive;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Isbn;

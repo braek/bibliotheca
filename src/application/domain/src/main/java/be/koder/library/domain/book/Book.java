@@ -12,6 +12,7 @@ import be.koder.library.vocabulary.file.Filename;
 
 import java.net.URL;
 
+// Book = aggregate root
 public final class Book {
 
     private final BookId id;
