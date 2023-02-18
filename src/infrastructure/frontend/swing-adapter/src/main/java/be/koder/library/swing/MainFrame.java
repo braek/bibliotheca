@@ -1,18 +1,31 @@
 package be.koder.library.swing;
 
+import be.koder.library.swing.menu.MainMenuBar;
+import be.koder.library.swing.translations.Translations;
+
 import javax.swing.*;
 import java.awt.*;
 
 public final class MainFrame extends JFrame {
 
-    private final Facade facade;
+    public static MainFrame instance;
 
-    public MainFrame(Facade facade) throws HeadlessException {
-        this.facade = facade;
-        setTitle("Library");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public static MainFrame getInstance() {
+        if (instance == null) {
+            instance = new MainFrame();
+        }
+        return instance;
+    }
+
+    private MainFrame() throws HeadlessException {
+        setJMenuBar(MainMenuBar.INSTANCE);
+        setTitle(Translations.LIBRARY);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(new Dimension(800, 600));
         setBackground(Color.BLACK);
+    }
+
+    public void showIt() {
         setVisible(true);
     }
 }
