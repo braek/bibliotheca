@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @DisplayName("Given a use case to upload hardcovers for Books")
-class UploadHardcoverUseCaseTest {
+class UploadHardcoverTest {
 
     private final MockBookRepository bookRepository = new MockBookRepository();
     private final MockHardcoverStore hardcoverStore = new MockHardcoverStore();

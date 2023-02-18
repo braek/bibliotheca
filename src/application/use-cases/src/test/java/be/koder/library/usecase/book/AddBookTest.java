@@ -1,5 +1,6 @@
 package be.koder.library.usecase.book;
 
+import be.koder.library.api.AddBook;
 import be.koder.library.api.presenter.AddBookPresenter;
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookSnapshot;
@@ -18,11 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @DisplayName("Given a use case to add Books")
-class AddBookUseCaseTest {
+class AddBookTest {
 
     private final MockBookRepository bookRepository = new MockBookRepository();
     private final MockEventPublisher eventPublisher = new MockEventPublisher();
-    private final AddBookUseCase useCase = new AddBookUseCase(bookRepository, bookRepository, eventPublisher);
+    private final AddBook addBook = new AddBookUseCase(bookRepository, bookRepository, eventPublisher);
 
     @Nested
     @DisplayName("when Book is added successfully")
@@ -36,7 +37,7 @@ class AddBookUseCaseTest {
 
         @BeforeEach
         void setup() {
-            useCase.addBook(book.isbn(), book.title(), book.author(), this);
+            addBook.addBook(book.isbn(), book.title(), book.author(), this);
             savedBook = bookRepository.get(bookId).map(Book::takeSnapshot).orElseThrow();
         }
 
@@ -89,7 +90,7 @@ class AddBookUseCaseTest {
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
-            useCase.addBook(book.isbn(), book.title(), book.author(), this);
+            addBook.addBook(book.isbn(), book.title(), book.author(), this);
         }
 
         @Test

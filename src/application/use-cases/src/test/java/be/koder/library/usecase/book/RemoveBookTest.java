@@ -1,5 +1,6 @@
 package be.koder.library.usecase.book;
 
+import be.koder.library.api.RemoveBook;
 import be.koder.library.api.presenter.RemoveBookPresenter;
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookSnapshot;
@@ -20,11 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @DisplayName("Given a use case to remove Books")
-class RemoveBookUseCaseTest {
+class RemoveBookTest {
 
     private final MockBookRepository bookRepository = new MockBookRepository();
     private final MockEventPublisher eventPublisher = new MockEventPublisher();
-    private final RemoveBookUseCase useCase = new RemoveBookUseCase(bookRepository, eventPublisher);
+    private final RemoveBook removeBook = new RemoveBookUseCase(bookRepository, eventPublisher);
 
     @Nested
     @DisplayName("when Book is removed successfully")
@@ -43,7 +44,7 @@ class RemoveBookUseCaseTest {
                     Author.fromString("The Author"),
                     null
             )));
-            useCase.removeBook(bookId, this);
+            removeBook.removeBook(bookId, this);
         }
 
         @Test
@@ -89,7 +90,7 @@ class RemoveBookUseCaseTest {
 
         @BeforeEach
         void setup() {
-            useCase.removeBook(BookId.createNew(), this);
+            removeBook.removeBook(BookId.createNew(), this);
         }
 
         @Test
