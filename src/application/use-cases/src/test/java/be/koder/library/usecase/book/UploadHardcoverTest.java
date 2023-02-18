@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-@DisplayName("Given a use case to upload hardcovers for Books")
+@DisplayName("Given an API to upload hardcovers for Books")
 class UploadHardcoverTest {
 
     private final MockBookRepository bookRepository = new MockBookRepository();

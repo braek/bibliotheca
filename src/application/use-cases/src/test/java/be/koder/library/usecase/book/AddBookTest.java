@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-@DisplayName("Given a use case to add Books")
+@DisplayName("Given an API to add Books")
 class AddBookTest {
 
     private final MockBookRepository bookRepository = new MockBookRepository();

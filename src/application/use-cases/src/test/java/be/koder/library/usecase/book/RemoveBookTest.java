@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-@DisplayName("Given a use case to remove Books")
+@DisplayName("Given an API to remove Books")
 class RemoveBookTest {
 
     private final MockBookRepository bookRepository = new MockBookRepository();
