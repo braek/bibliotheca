@@ -22,19 +22,20 @@ class ListBooksTest {
     private final ListBooks listBooks = new ListBooksQuery(bookRepository);
 
     @Nested
-    @DisplayName("when listing of Books is requested")
-    class TestHappyFlow {
+    @DisplayName("when listing of Books is requested with results")
+    class TestListingWithResults {
 
         private final List<BookListItem> books = new ArrayList<>();
 
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(BookObjectMother.INSTANCE.cleanCode));
+            bookRepository.save(Book.fromSnapshot(BookObjectMother.INSTANCE.howGoogleTestsSoftware));
             books.addAll(listBooks.listBooks());
         }
 
         @Test
-        @DisplayName("it should contain items")
+        @DisplayName("it should return items")
         void itemsReturned() {
             assertThat(books).containsAll(List.of(
                     new BookListItem(
@@ -43,8 +44,33 @@ class ListBooksTest {
                             BookObjectMother.INSTANCE.cleanCode.title(),
                             BookObjectMother.INSTANCE.cleanCode.author(),
                             BookObjectMother.INSTANCE.cleanCode.hardcover()
+                    ),
+                    new BookListItem(
+                            BookObjectMother.INSTANCE.howGoogleTestsSoftware.id(),
+                            BookObjectMother.INSTANCE.howGoogleTestsSoftware.isbn(),
+                            BookObjectMother.INSTANCE.howGoogleTestsSoftware.title(),
+                            BookObjectMother.INSTANCE.howGoogleTestsSoftware.author(),
+                            BookObjectMother.INSTANCE.howGoogleTestsSoftware.hardcover()
                     )
             ));
+        }
+    }
+
+    @Nested
+    @DisplayName("when listing of Books is requested with no results")
+    class TestListingWithNoResults {
+
+        private final List<BookListItem> books = new ArrayList<>();
+
+        @BeforeEach
+        void setup() {
+            books.addAll(listBooks.listBooks());
+        }
+
+        @Test
+        @DisplayName("it should return no items")
+        void noItemsReturned() {
+            assertThat(books).isEmpty();
         }
     }
 }

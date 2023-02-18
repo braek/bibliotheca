@@ -17,4 +17,12 @@ public enum BookObjectMother {
             Author.fromString("Robert C. Martin"),
             null
     );
+
+    public final BookSnapshot howGoogleTestsSoftware = new BookSnapshot(
+            BookId.createNew(),
+            Isbn.fromString("0321803027"),
+            Title.fromString("How Google Tests Software"),
+            Author.fromString("James A. Whittaker"),
+            null
+    );
 }
