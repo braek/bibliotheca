@@ -2,7 +2,7 @@ package be.koder.library.domain.book;
 
 import be.koder.library.domain.book.event.BookAdded;
 import be.koder.library.domain.book.event.BookModified;
-import be.koder.library.domain.book.event.UploadHardcoverEventPublisher;
+import be.koder.library.domain.book.event.SetHardcoverEventPublisher;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
@@ -61,7 +61,7 @@ public final class Book {
         );
     }
 
-    public void uploadHardcover(final Filename filename, final byte[] data, final HardcoverStore hardcoverStore, final UploadHardcoverEventPublisher eventPublisher) {
+    public void setHardcover(final Filename filename, final byte[] data, final HardcoverStore hardcoverStore, final SetHardcoverEventPublisher eventPublisher) {
         if (!HardcoverSettings.ALLOWED_EXTENSIONS.contains(filename.getExtension())) {
             eventPublisher.fileExtensionNotAllowed();
             return;
@@ -76,10 +76,10 @@ public final class Book {
         }
         var response = hardcoverStore.store(String.format("%s.%s", this.id, filename.getExtension()), data);
         if (!response.isOkay()) {
-            eventPublisher.uploadFailed(response.getError());
+            eventPublisher.storageFailed(response.getError());
             return;
         }
         this.hardcover = response.getUrl();
-        eventPublisher.uploaded(this.id, this.hardcover);
+        eventPublisher.set(this.id, this.hardcover);
     }
 }

@@ -4,11 +4,11 @@ import be.koder.library.vocabulary.book.BookId;
 
 import java.net.URL;
 
-public interface UploadHardcoverEventPublisher {
+public interface SetHardcoverEventPublisher {
 
-    void uploaded(BookId bookId, URL hardcover);
+    void set(BookId bookId, URL hardcover);
 
-    void uploadFailed(String reason);
+    void storageFailed(String reason);
 
     void fileExtensionNotAllowed();
 

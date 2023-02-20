@@ -8,7 +8,7 @@ import be.koder.library.query.book.ListBooksQuery;
 import be.koder.library.usecase.book.AddBookUseCase;
 import be.koder.library.usecase.book.ModifyBookUseCase;
 import be.koder.library.usecase.book.RemoveBookUseCase;
-import be.koder.library.usecase.book.UploadHardcoverUseCase;
+import be.koder.library.usecase.book.SetHardcoverUseCase;
 
 public final class AppContext {
 
@@ -22,5 +22,5 @@ public final class AppContext {
     public static final AddBook addBook = new AddBookUseCase(bookRepository, bookRepository, eventPublisher);
     public static final ModifyBook modifyBook = new ModifyBookUseCase(bookRepository, eventPublisher);
     public static final RemoveBook removeBook = new RemoveBookUseCase(bookRepository, eventPublisher);
-    public static final UploadHardcover uploadHardcover = new UploadHardcoverUseCase(bookRepository, hardcoverStore, eventPublisher);
+    public static final SetHardcover setHardcover = new SetHardcoverUseCase(bookRepository, hardcoverStore, eventPublisher);
 }

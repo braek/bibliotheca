@@ -2,9 +2,9 @@ package be.koder.library.api.presenter;
 
 import java.net.URL;
 
-public interface UploadHardcoverPresenter {
+public interface SetHardcoverPresenter {
 
-    void uploaded(URL hardcover);
+    void set(URL hardcover);
 
     void fileExtensionNotAllowed();
 
@@ -14,5 +14,5 @@ public interface UploadHardcoverPresenter {
 
     void bookNotFound();
 
-    void uploadFailed(String reason);
+    void storageFailed(String reason);
 }

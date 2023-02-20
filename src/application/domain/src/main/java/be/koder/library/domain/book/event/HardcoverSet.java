@@ -5,5 +5,5 @@ import be.koder.library.vocabulary.book.BookId;
 
 import java.net.URL;
 
-public record HardcoverUploaded(BookId bookId, URL hardcover) implements Event {
+public record HardcoverSet(BookId bookId, URL hardcover) implements Event {
 }

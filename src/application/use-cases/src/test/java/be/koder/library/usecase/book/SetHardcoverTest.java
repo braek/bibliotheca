@@ -1,11 +1,11 @@
 package be.koder.library.usecase.book;
 
-import be.koder.library.api.UploadHardcover;
-import be.koder.library.api.presenter.UploadHardcoverPresenter;
+import be.koder.library.api.SetHardcover;
+import be.koder.library.api.presenter.SetHardcoverPresenter;
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookSnapshot;
 import be.koder.library.domain.book.HardcoverSettings;
-import be.koder.library.domain.book.event.HardcoverUploaded;
+import be.koder.library.domain.book.event.HardcoverSet;
 import be.koder.library.test.BookObjectMother;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
@@ -28,35 +28,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-@DisplayName("Given an API to upload hardcovers for Books")
-class UploadHardcoverTest {
+@DisplayName("Given an API to set hardcovers for Books")
+class SetHardcoverTest {
 
     private final MockBookRepository bookRepository = new MockBookRepository();
     private final MockHardcoverStore hardcoverStore = new MockHardcoverStore();
     private final MockEventPublisher eventPublisher = new MockEventPublisher();
-    private final UploadHardcover uploadHardcover = new UploadHardcoverUseCase(bookRepository, hardcoverStore, eventPublisher);
+    private final SetHardcover setHardcover = new SetHardcoverUseCase(bookRepository, hardcoverStore, eventPublisher);
 
     @Nested
-    @DisplayName("when hardcover uploaded successfully")
-    class TestHappyFlow implements UploadHardcoverPresenter {
+    @DisplayName("when hardcover was set successfully")
+    class TestHappyFlow implements SetHardcoverPresenter {
 
         private final BookSnapshot book = BookObjectMother.INSTANCE.cleanCode;
         private final Filename filename = Filename.fromString("HardcoverForBook.jpg");
         private final byte[] data = "TheImage".getBytes();
         private BookSnapshot updatedBook;
-        private boolean uploadedCalled;
+        private boolean setCalled;
 
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
-            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
+            setHardcover.setHardcover(book.id(), filename, data, this);
             updatedBook = bookRepository.get(book.id()).map(Book::takeSnapshot).orElseThrow();
         }
 
         @Test
         @DisplayName("it should provide feedback")
         void feedbackProvided() {
-            assertTrue(uploadedCalled);
+            assertTrue(setCalled);
         }
 
         @Test
@@ -70,15 +70,15 @@ class UploadHardcoverTest {
         @DisplayName("it should publish an event")
         void eventPublished() {
             assertThat(eventPublisher.getLastEvent()).hasValueSatisfying(it -> {
-                assertThat(it).isInstanceOf(HardcoverUploaded.class);
-                var event = (HardcoverUploaded) it;
+                assertThat(it).isInstanceOf(HardcoverSet.class);
+                var event = (HardcoverSet) it;
                 assertThat(event.hardcover().toString()).endsWith(String.format("%s.%s", book.id(), filename.getExtension()));
             });
         }
 
         @Override
-        public void uploaded(URL hardcover) {
-            uploadedCalled = true;
+        public void set(URL hardcover) {
+            setCalled = true;
         }
 
         @Override
@@ -102,14 +102,14 @@ class UploadHardcoverTest {
         }
 
         @Override
-        public void uploadFailed(String reason) {
+        public void storageFailed(String reason) {
             fail();
         }
     }
 
     @Nested
     @DisplayName("when file extension not allowed")
-    class TestWhenFileExtensionNotAllowed implements UploadHardcoverPresenter {
+    class TestWhenFileExtensionNotAllowed implements SetHardcoverPresenter {
 
         private final BookSnapshot book = BookObjectMother.INSTANCE.cleanCode;
         private final byte[] data = "TheImage".getBytes();
@@ -140,7 +140,7 @@ class UploadHardcoverTest {
         @DisplayName("it should provide feedback")
         void feedbackProvided(final String extension) {
             final Filename filename = Filename.fromString(String.format("HardcoverForBook.%s", extension));
-            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
+            setHardcover.setHardcover(book.id(), filename, data, this);
             assertThat(fileExtensionNotAllowedCalled).isTrue();
         }
 
@@ -150,7 +150,7 @@ class UploadHardcoverTest {
         }
 
         @Override
-        public void uploaded(URL hardcover) {
+        public void set(URL hardcover) {
             fail();
         }
 
@@ -170,20 +170,20 @@ class UploadHardcoverTest {
         }
 
         @Override
-        public void uploadFailed(String reason) {
+        public void storageFailed(String reason) {
             fail();
         }
     }
 
     @Nested
-    @DisplayName("when hardcover uploaded for non-existing Book")
-    class TestWhenBookNotFound implements UploadHardcoverPresenter {
+    @DisplayName("when hardcover set for non-existing Book")
+    class TestWhenBookNotFound implements SetHardcoverPresenter {
 
         private boolean bookNotFoundCalled;
 
         @BeforeEach
         void setup() {
-            uploadHardcover.uploadHardcover(BookId.createNew(), Filename.fromString("TheHardcover.jpg"), "ImageBytes".getBytes(), this);
+            setHardcover.setHardcover(BookId.createNew(), Filename.fromString("TheHardcover.jpg"), "ImageBytes".getBytes(), this);
         }
 
         @Test
@@ -193,7 +193,7 @@ class UploadHardcoverTest {
         }
 
         @Override
-        public void uploaded(URL hardcover) {
+        public void set(URL hardcover) {
             fail();
         }
 
@@ -218,40 +218,40 @@ class UploadHardcoverTest {
         }
 
         @Override
-        public void uploadFailed(String reason) {
+        public void storageFailed(String reason) {
             fail();
         }
     }
 
     @Nested
-    @DisplayName("when hardcover upload fails")
-    class TestWhenUploadFails implements UploadHardcoverPresenter {
+    @DisplayName("when hardcover storage fails")
+    class TestWhenStorageFails implements SetHardcoverPresenter {
 
         private final BookSnapshot book = BookObjectMother.INSTANCE.cleanCode;
         private final Filename filename = Filename.fromString("HardcoverForBook.jpg");
         private final byte[] data = "TheImage".getBytes();
-        private boolean uploadFailedCalled;
+        private boolean storageFailedCalled;
 
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
             hardcoverStore.enableFail();
-            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
+            setHardcover.setHardcover(book.id(), filename, data, this);
         }
 
         @Test
         @DisplayName("it should provide feedback")
         void feedbackProvided() {
-            assertThat(uploadFailedCalled).isTrue();
+            assertThat(storageFailedCalled).isTrue();
         }
 
         @Override
-        public void uploadFailed(String reason) {
-            uploadFailedCalled = true;
+        public void storageFailed(String reason) {
+            storageFailedCalled = true;
         }
 
         @Override
-        public void uploaded(URL hardcover) {
+        public void set(URL hardcover) {
             fail();
         }
 
@@ -277,8 +277,8 @@ class UploadHardcoverTest {
     }
 
     @Nested
-    @DisplayName("when hardcover uploaded that is empty")
-    class TestWhenHardcoverEmpty implements UploadHardcoverPresenter {
+    @DisplayName("when hardcover set that is empty")
+    class TestWhenHardcoverEmpty implements SetHardcoverPresenter {
 
         private final BookSnapshot book = BookObjectMother.INSTANCE.cleanCode;
         private final Filename filename = Filename.fromString("HardcoverForBook.jpg");
@@ -288,7 +288,7 @@ class UploadHardcoverTest {
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
-            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
+            setHardcover.setHardcover(book.id(), filename, data, this);
         }
 
         @Test
@@ -303,7 +303,7 @@ class UploadHardcoverTest {
         }
 
         @Override
-        public void uploaded(URL hardcover) {
+        public void set(URL hardcover) {
             fail();
         }
 
@@ -323,14 +323,14 @@ class UploadHardcoverTest {
         }
 
         @Override
-        public void uploadFailed(String reason) {
+        public void storageFailed(String reason) {
             fail();
         }
     }
 
     @Nested
-    @DisplayName("when hardcover uploaded that is too large")
-    class TestWhenHardcoverTooLarge implements UploadHardcoverPresenter {
+    @DisplayName("when hardcover set that is too large")
+    class TestWhenHardcoverTooLarge implements SetHardcoverPresenter {
 
         private final BookSnapshot book = BookObjectMother.INSTANCE.cleanCode;
         private final Filename filename = Filename.fromString("HardcoverForBook.jpg");
@@ -341,7 +341,7 @@ class UploadHardcoverTest {
             bookRepository.save(Book.fromSnapshot(book));
             byte[] data = new byte[HardcoverSettings.MAX_FILE_SIZE + 1];
             new Random().nextBytes(data);
-            uploadHardcover.uploadHardcover(book.id(), filename, data, this);
+            setHardcover.setHardcover(book.id(), filename, data, this);
         }
 
         @Test
@@ -356,7 +356,7 @@ class UploadHardcoverTest {
         }
 
         @Override
-        public void uploaded(URL hardcover) {
+        public void set(URL hardcover) {
             fail();
         }
 
@@ -376,7 +376,7 @@ class UploadHardcoverTest {
         }
 
         @Override
-        public void uploadFailed(String reason) {
+        public void storageFailed(String reason) {
             fail();
         }
     }
