@@ -4,10 +4,7 @@ import be.koder.library.api.AddBook;
 import be.koder.library.api.presenter.AddBookPresenter;
 import be.koder.library.swing.MainFrame;
 import be.koder.library.swing.translations.Translations;
-import be.koder.library.vocabulary.book.Author;
-import be.koder.library.vocabulary.book.BookId;
-import be.koder.library.vocabulary.book.Isbn;
-import be.koder.library.vocabulary.book.Title;
+import be.koder.library.vocabulary.book.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,38 +15,44 @@ public final class AddBookDialog extends JDialog implements ActionListener, AddB
 
     private AddBook addBook;
 
-    private JTextField isbnTextField;
-    private JTextField titleTextField;
-    private JTextField authorTextField;
+    private final JTextField isbnTextField = new JTextField();
+    private final JTextField titleTextField = new JTextField();
+    private final JTextField authorTextField = new JTextField();
 
     public AddBookDialog() {
         super(MainFrame.getInstance(), Translations.ADD_BOOK, true);
 
         setSize(new Dimension(640, 480));
 
-        isbnTextField = new JTextField();
-
-        titleTextField = new JTextField();
-
-        authorTextField = new JTextField();
-
         final JPanel panel = (JPanel) getContentPane();
-        panel.setLayout(new GridLayout(3, 2, 10, 10));
+        panel.setLayout(new GridLayout(4, 2, 10, 10));
         panel.add(new JLabel(Translations.ISBN + ":"));
         panel.add(isbnTextField);
         panel.add(new JLabel(Translations.TITLE + ":"));
         panel.add(titleTextField);
         panel.add(new JLabel(Translations.AUTHOR + ":"));
         panel.add(authorTextField);
+        panel.add(new JLabel(" "));
+        final JButton addBookButton = new JButton("Add Book");
+        addBookButton.addActionListener(this);
+        panel.add(addBookButton);
         pack();
     }
 
     @Override
-    public void actionPerformed(final ActionEvent e) {
-        final Isbn isbn = Isbn.fromString(isbnTextField.getText());
-        final Title title = Title.fromString(titleTextField.getText());
-        final Author author = Author.fromString(authorTextField.getText());
-        addBook.addBook(isbn, title, author, this);
+    public void actionPerformed(final ActionEvent event) {
+        try {
+            final Isbn isbn = Isbn.fromString(isbnTextField.getText());
+            final Title title = Title.fromString(titleTextField.getText());
+            final Author author = Author.fromString(authorTextField.getText());
+            addBook.addBook(isbn, title, author, this);
+        } catch (final InvalidIsbnException e) {
+            JOptionPane.showMessageDialog(this, "ISBN is invalid", Translations.WARNING, JOptionPane.WARNING_MESSAGE);
+        } catch (final InvalidTitleException e) {
+            JOptionPane.showMessageDialog(this, "Title is invalid", Translations.WARNING, JOptionPane.WARNING_MESSAGE);
+        } catch (final InvalidAuthorException e) {
+            JOptionPane.showMessageDialog(this, "Author is invalid", Translations.WARNING, JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     @Override

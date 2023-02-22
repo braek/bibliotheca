@@ -10,4 +10,5 @@ public interface Translations {
     String ISBN = "ISBN";
     String TITLE = "Title";
     String AUTHOR = "Author";
+    String WARNING = "Warning";
 }
