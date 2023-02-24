@@ -57,11 +57,11 @@ public final class AddBookDialog extends JDialog implements ActionListener, AddB
 
     @Override
     public void added(BookId bookId) {
-
+        JOptionPane.showMessageDialog(this, "Book is added successfully", Translations.INFO, JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
     public void isbnAlreadyExists() {
-
+        JOptionPane.showMessageDialog(this, "ISBN already exists", Translations.WARNING, JOptionPane.WARNING_MESSAGE);
     }
 }

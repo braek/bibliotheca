@@ -11,4 +11,5 @@ public interface Translations {
     String TITLE = "Title";
     String AUTHOR = "Author";
     String WARNING = "Warning";
+    String INFO = "Info";
 }
