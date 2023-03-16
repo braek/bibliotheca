@@ -3,6 +3,8 @@ package be.koder.library.inmemory;
 import be.koder.library.domain.book.HardcoverStore;
 import be.koder.library.domain.book.HardcoverStoreResponse;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +15,10 @@ public final class InMemoryHardcoverStore implements HardcoverStore {
     @Override
     public HardcoverStoreResponse store(String key, byte[] value) {
         store.put(key, value);
-        return HardcoverStoreResponse.success(null);
+        try {
+            return HardcoverStoreResponse.success(new URL(String.format("https://in.memory.impl/images/%s", key)));
+        } catch (MalformedURLException e) {
+            return HardcoverStoreResponse.failed("URL generation failed");
+        }
     }
 }

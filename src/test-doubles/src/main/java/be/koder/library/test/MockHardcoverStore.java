@@ -21,14 +21,14 @@ public final class MockHardcoverStore implements HardcoverStore {
     public HardcoverStoreResponse store(final String key, final byte[] value) {
         if (fail) {
             fail = false;
-            return HardcoverStoreResponse.failed("Store failed");
+            return HardcoverStoreResponse.failed("Storage failed");
         }
         try {
             data.put(key, value);
             final var url = new URL(String.format("https://www.mock.com/images/%s", key));
             return HardcoverStoreResponse.success(url);
         } catch (final MalformedURLException e) {
-            return HardcoverStoreResponse.failed("Store failed");
+            return HardcoverStoreResponse.failed("Storage failed");
         }
     }
 }
