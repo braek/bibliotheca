@@ -13,6 +13,6 @@ public final class InMemoryHardcoverStore implements HardcoverStore {
     @Override
     public HardcoverStoreResponse store(String key, byte[] value) {
         store.put(key, value);
-        return HardcoverStoreResponse.okay(null);
+        return HardcoverStoreResponse.success(null);
     }
 }

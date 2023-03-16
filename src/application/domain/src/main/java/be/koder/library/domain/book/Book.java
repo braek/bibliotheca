@@ -75,7 +75,7 @@ public final class Book {
             return;
         }
         var response = hardcoverStore.store(String.format("%s.%s", this.id, filename.getExtension()), data);
-        if (!response.isOkay()) {
+        if (response.isNok()) {
             eventPublisher.storageFailed(response.getError());
             return;
         }

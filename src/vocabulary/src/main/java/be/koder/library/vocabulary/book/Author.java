@@ -9,7 +9,7 @@ public final class Author {
 
     private final String value;
 
-    private Author(String value) {
+    private Author(final String value) {
         var sanitized = ofNullable(value)
                 .map(String::trim)
                 .orElse(null);

@@ -26,7 +26,7 @@ public final class MockHardcoverStore implements HardcoverStore {
         try {
             data.put(key, value);
             final var url = new URL(String.format("https://www.mock.com/images/%s", key));
-            return HardcoverStoreResponse.okay(url);
+            return HardcoverStoreResponse.success(url);
         } catch (final MalformedURLException e) {
             return HardcoverStoreResponse.failed("Store failed");
         }

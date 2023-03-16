@@ -5,17 +5,17 @@ import java.net.URL;
 public final class HardcoverStoreResponse {
 
     private final URL url;
-    private final boolean okay;
+    private final boolean nok;
     private final String error;
 
-    private HardcoverStoreResponse(final URL url, final boolean okay, final String error) {
+    private HardcoverStoreResponse(final URL url, final boolean nok, final String error) {
         this.url = url;
-        this.okay = okay;
+        this.nok = nok;
         this.error = error;
     }
 
-    public boolean isOkay() {
-        return okay;
+    public boolean isNok() {
+        return nok;
     }
 
     public URL getUrl() {
@@ -26,11 +26,11 @@ public final class HardcoverStoreResponse {
         return error;
     }
 
-    public static HardcoverStoreResponse okay(final URL url) {
-        return new HardcoverStoreResponse(url, true, null);
+    public static HardcoverStoreResponse success(final URL url) {
+        return new HardcoverStoreResponse(url, false, null);
     }
 
     public static HardcoverStoreResponse failed(final String error) {
-        return new HardcoverStoreResponse(null, false, error);
+        return new HardcoverStoreResponse(null, true, error);
     }
 }

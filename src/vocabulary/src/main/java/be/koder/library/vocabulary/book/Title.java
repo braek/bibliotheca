@@ -9,7 +9,7 @@ public final class Title {
 
     private final String value;
 
-    private Title(String value) {
+    private Title(final String value) {
         var sanitized = ofNullable(value)
                 .map(String::trim)
                 .orElse(null);
