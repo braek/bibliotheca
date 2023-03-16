@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @DisplayName("Given an API to set hardcovers for Books")
-class SetHardcoverTest {
+class SetHardcoverUseCaseTest {
 
     private final MockBookRepository bookRepository = new MockBookRepository();
     private final MockHardcoverStore hardcoverStore = new MockHardcoverStore();

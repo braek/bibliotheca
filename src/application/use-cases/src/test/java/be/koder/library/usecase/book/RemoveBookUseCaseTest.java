@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @DisplayName("Given an API to remove Books")
-class RemoveBookTest {
+class RemoveBookUseCaseTest {
 
     private final MockBookRepository bookRepository = new MockBookRepository();
     private final MockEventPublisher eventPublisher = new MockEventPublisher();
