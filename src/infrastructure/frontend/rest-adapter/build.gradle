@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(':api')
+    implementation project(':vocabulary')
+
+    testImplementation project(':test-doubles')
+}
+
+description = 'rest-adapter'

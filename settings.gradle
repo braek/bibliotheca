@@ -24,6 +24,8 @@ project(':in-memory-adapter').projectDir = file('src/infrastructure/backend/in-m
 // Frontend
 include(':swing-adapter')
 project(':swing-adapter').projectDir = file('src/infrastructure/frontend/swing-adapter')
+include(':rest-adapter')
+project(':rest-adapter').projectDir = file('src/infrastructure/frontend/rest-adapter')
 
 // Main
 include(':main')
