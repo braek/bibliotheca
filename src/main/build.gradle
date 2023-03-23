@@ -6,7 +6,9 @@ dependencies {
     implementation project(':vocabulary')
 
     implementation project(':in-memory-adapter')
-    implementation project(':swing-adapter')
+    implementation project(':rest-adapter')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.7.9'
 }
 
 description = 'main'

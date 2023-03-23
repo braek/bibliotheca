@@ -15,6 +15,10 @@ public final class BookId {
         return new BookId(UUID.randomUUID());
     }
 
+    public UUID getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return value.toString();
