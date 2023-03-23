@@ -12,6 +12,8 @@ import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.Isbn;
 import be.koder.library.vocabulary.book.Title;
 
+import static java.util.Objects.requireNonNull;
+
 public final class AddBookUseCase implements UseCase<AddBookCommand, AddBookPresenter>, AddBook {
 
     private final BookRepository bookRepository;
@@ -26,6 +28,9 @@ public final class AddBookUseCase implements UseCase<AddBookCommand, AddBookPres
 
     @Override
     public void addBook(Isbn isbn, Title title, Author author, AddBookPresenter presenter) {
+        requireNonNull(isbn, "Isbn cannot be NULL");
+        requireNonNull(title, "Title cannot be NULL");
+        requireNonNull(author, "Author cannot be NULL");
         execute(new AddBookCommand(isbn, title, author), presenter);
     }
 

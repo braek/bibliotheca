@@ -10,6 +10,8 @@ import be.koder.library.usecase.UseCase;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.file.Filename;
 
+import static java.util.Objects.requireNonNull;
+
 public final class SetHardcoverUseCase implements UseCase<SetHardcoverCommand, SetHardcoverPresenter>, SetHardcover {
 
     private final BookRepository bookRepository;
@@ -24,6 +26,9 @@ public final class SetHardcoverUseCase implements UseCase<SetHardcoverCommand, S
 
     @Override
     public void setHardcover(final BookId bookId, final Filename filename, final byte[] data, final SetHardcoverPresenter presenter) {
+        requireNonNull(bookId, "BookId cannot be NULL");
+        requireNonNull(filename, "Filename cannot be NULL");
+        requireNonNull(data, "Data cannot be NULL");
         execute(new SetHardcoverCommand(bookId, filename, data), presenter);
     }
 
