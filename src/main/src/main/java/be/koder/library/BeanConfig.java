@@ -32,6 +32,11 @@ public class BeanConfig {
     }
 
     @Bean
+    HardcoverStore hardcoverStore() {
+        return new InMemoryHardcoverStore();
+    }
+
+    @Bean
     AddBook addBook(BookRepository bookRepository, IsbnService isbnService, EventPublisher eventPublisher) {
         return new AddBookUseCase(bookRepository, isbnService, eventPublisher);
     }
@@ -42,17 +47,12 @@ public class BeanConfig {
     }
 
     @Bean
-    HardcoverStore hardcoverStore() {
-        return new InMemoryHardcoverStore();
+    SetHardcover setHardcover(BookRepository bookRepository, HardcoverStore hardcoverStore, EventPublisher eventPublisher) {
+        return new SetHardcoverUseCase(bookRepository, hardcoverStore, eventPublisher);
     }
 
     @Bean
     RemoveBook removeBook(BookRepository bookRepository, EventPublisher eventPublisher) {
         return new RemoveBookUseCase(bookRepository, eventPublisher);
-    }
-
-    @Bean
-    SetHardcover setHardcover(BookRepository bookRepository, HardcoverStore hardcoverStore, EventPublisher eventPublisher) {
-        return new SetHardcoverUseCase(bookRepository, hardcoverStore, eventPublisher);
     }
 }
