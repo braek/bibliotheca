@@ -13,7 +13,7 @@ public final class AddBookRestPresenter implements RestPresenter, AddBookPresent
 
     @Override
     public void added(BookId bookId) {
-        response = ResponseEntity.status(HttpStatus.CREATED).body(new AddBookResponse(bookId.getValue()));
+        response = ResponseEntity.status(HttpStatus.CREATED).body(new BookAddedResponse(bookId.getValue()));
     }
 
     @Override
