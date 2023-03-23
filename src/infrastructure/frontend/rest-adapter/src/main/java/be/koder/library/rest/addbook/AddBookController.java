@@ -2,6 +2,7 @@ package be.koder.library.rest.addbook;
 
 import be.koder.library.api.AddBook;
 import be.koder.library.api.presenter.AddBookPresenter;
+import be.koder.library.rest.ErrorResponse;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Isbn;
@@ -37,6 +38,6 @@ public class AddBookController implements AddBookPresenter {
 
     @Override
     public void isbnAlreadyExists() {
-
+        response = ResponseEntity.badRequest().body(new ErrorResponse("Het ISBN bestaat al."));
     }
 }
