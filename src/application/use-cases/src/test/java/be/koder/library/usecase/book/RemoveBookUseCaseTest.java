@@ -7,6 +7,7 @@ import be.koder.library.domain.book.BookSnapshot;
 import be.koder.library.domain.book.event.BookRemoved;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
+import be.koder.library.usecase.removebook.RemoveBookUseCase;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Isbn;

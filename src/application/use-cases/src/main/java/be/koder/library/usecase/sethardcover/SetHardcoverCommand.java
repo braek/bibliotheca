@@ -1,4 +1,4 @@
-package be.koder.library.usecase.book.command;
+package be.koder.library.usecase.sethardcover;
 
 import be.koder.library.domain.command.Command;
 import be.koder.library.vocabulary.book.BookId;

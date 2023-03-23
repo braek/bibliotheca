@@ -1,4 +1,4 @@
-package be.koder.library.usecase.book;
+package be.koder.library.usecase.modifybook;
 
 import be.koder.library.api.ModifyBook;
 import be.koder.library.api.presenter.ModifyBookPresenter;
@@ -6,7 +6,6 @@ import be.koder.library.domain.book.BookRepository;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.usecase.BufferedEventPublisher;
 import be.koder.library.usecase.UseCase;
-import be.koder.library.usecase.book.command.ModifyBookCommand;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Title;

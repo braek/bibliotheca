@@ -1,4 +1,4 @@
-package be.koder.library.usecase.book;
+package be.koder.library.usecase.addbook;
 
 import be.koder.library.api.AddBook;
 import be.koder.library.api.presenter.AddBookPresenter;
@@ -8,7 +8,6 @@ import be.koder.library.domain.book.IsbnService;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.usecase.BufferedEventPublisher;
 import be.koder.library.usecase.UseCase;
-import be.koder.library.usecase.book.command.AddBookCommand;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.Isbn;
 import be.koder.library.vocabulary.book.Title;

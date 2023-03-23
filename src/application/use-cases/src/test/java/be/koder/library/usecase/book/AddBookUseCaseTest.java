@@ -8,6 +8,7 @@ import be.koder.library.domain.book.event.BookAdded;
 import be.koder.library.test.BookObjectMother;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
+import be.koder.library.usecase.addbook.AddBookUseCase;
 import be.koder.library.vocabulary.book.BookId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

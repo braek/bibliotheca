@@ -1,4 +1,4 @@
-package be.koder.library.usecase.book;
+package be.koder.library.usecase.removebook;
 
 import be.koder.library.api.RemoveBook;
 import be.koder.library.api.presenter.RemoveBookPresenter;
@@ -7,7 +7,6 @@ import be.koder.library.domain.book.event.BookRemoved;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.usecase.BufferedEventPublisher;
 import be.koder.library.usecase.UseCase;
-import be.koder.library.usecase.book.command.RemoveBookCommand;
 import be.koder.library.vocabulary.book.BookId;
 
 public final class RemoveBookUseCase implements UseCase<RemoveBookCommand, RemoveBookPresenter>, RemoveBook {

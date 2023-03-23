@@ -8,6 +8,7 @@ import be.koder.library.domain.book.event.BookModified;
 import be.koder.library.test.BookObjectMother;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
+import be.koder.library.usecase.modifybook.ModifyBookUseCase;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Title;

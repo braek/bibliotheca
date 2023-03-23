@@ -1,4 +1,4 @@
-package be.koder.library.usecase.book.event;
+package be.koder.library.usecase.sethardcover;
 
 import be.koder.library.api.presenter.SetHardcoverPresenter;
 import be.koder.library.domain.book.event.HardcoverSet;

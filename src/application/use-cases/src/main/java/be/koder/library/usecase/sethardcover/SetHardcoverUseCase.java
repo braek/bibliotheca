@@ -1,4 +1,4 @@
-package be.koder.library.usecase.book;
+package be.koder.library.usecase.sethardcover;
 
 import be.koder.library.api.SetHardcover;
 import be.koder.library.api.presenter.SetHardcoverPresenter;
@@ -7,8 +7,6 @@ import be.koder.library.domain.book.HardcoverStore;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.usecase.BufferedEventPublisher;
 import be.koder.library.usecase.UseCase;
-import be.koder.library.usecase.book.command.SetHardcoverCommand;
-import be.koder.library.usecase.book.event.SetHardcoverEventPublisherDecorator;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.file.Filename;
 

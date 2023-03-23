@@ -10,6 +10,7 @@ import be.koder.library.test.BookObjectMother;
 import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
 import be.koder.library.test.MockHardcoverStore;
+import be.koder.library.usecase.sethardcover.SetHardcoverUseCase;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.file.Filename;
 import org.junit.jupiter.api.BeforeEach;
