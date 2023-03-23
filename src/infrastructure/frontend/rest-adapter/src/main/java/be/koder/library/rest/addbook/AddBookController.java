@@ -7,6 +7,7 @@ import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Isbn;
 import be.koder.library.vocabulary.book.Title;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,7 +34,7 @@ public class AddBookController implements AddBookPresenter {
 
     @Override
     public void added(BookId bookId) {
-        response = ResponseEntity.ok(new AddBookResponse(bookId.getValue()));
+        response = ResponseEntity.status(HttpStatus.CREATED).body(new AddBookResponse(bookId.getValue()));
     }
 
     @Override
