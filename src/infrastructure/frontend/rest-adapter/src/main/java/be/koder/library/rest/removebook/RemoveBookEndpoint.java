@@ -1,28 +1,24 @@
-package be.koder.library.rest.addbook;
+package be.koder.library.rest.removebook;
 
 import be.koder.library.rest.ErrorResponse;
+import be.koder.library.rest.addbook.BookAddedResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-public interface AddBookEndpoint {
+import java.util.UUID;
+
+public interface RemoveBookEndpoint {
     @Operation(
-            requestBody = @RequestBody(
-                    content = @Content(
-                            schema = @Schema(
-                                    implementation = AddBookRequest.class
-                            )
-                    )
-            ),
             responses = {
                     @ApiResponse(
-                            description = "Book is added",
-                            responseCode = "201",
+                            description = "Book is removed",
+                            responseCode = "200",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(
@@ -31,8 +27,8 @@ public interface AddBookEndpoint {
                             )
                     ),
                     @ApiResponse(
-                            description = "Fout in request body",
-                            responseCode = "400",
+                            description = "Book does not exist",
+                            responseCode = "404",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(
@@ -42,10 +38,10 @@ public interface AddBookEndpoint {
                     )
             }
     )
-    @PostMapping(
-            value = "/books",
+    @DeleteMapping(
+            value = "/books/{bookId}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    ResponseEntity<Object> addBook(AddBookRequest request);
+    ResponseEntity<Object> removeBook(@PathVariable UUID bookId);
 }

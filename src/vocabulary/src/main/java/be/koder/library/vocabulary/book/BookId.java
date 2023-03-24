@@ -19,6 +19,10 @@ public final class BookId {
         return value;
     }
 
+    public static BookId fromUuid(final UUID uuid) {
+        return new BookId(uuid);
+    }
+
     @Override
     public String toString() {
         return value.toString();
