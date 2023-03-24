@@ -58,7 +58,7 @@ public interface SetHardcoverEndpoint {
                                             implementation = ErrorResponse.class
                                     )
                             )
-                    ),
+                    )
             }
     )
     @PostMapping(
