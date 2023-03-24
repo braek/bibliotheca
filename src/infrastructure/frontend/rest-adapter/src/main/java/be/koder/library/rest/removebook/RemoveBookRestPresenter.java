@@ -18,7 +18,7 @@ public final class RemoveBookRestPresenter implements RestPresenter, RemoveBookP
 
     @Override
     public void bookNotFound() {
-        response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Dit boek bestaat niet."));
+        response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Boek niet gevonden."));
     }
 
     @Override

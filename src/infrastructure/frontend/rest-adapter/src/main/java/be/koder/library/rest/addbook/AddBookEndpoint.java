@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 public interface AddBookEndpoint {
     @Operation(
+            tags = {
+                    "Books"
+            },
             requestBody = @RequestBody(
                     content = @Content(
                             schema = @Schema(
