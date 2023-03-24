@@ -1,4 +1,4 @@
-package be.koder.library.rest.addbook;
+package be.koder.library.rest.modifybook;
 
 import be.koder.library.rest.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -7,28 +7,31 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public interface AddBookEndpoint {
+import java.util.UUID;
+
+public interface ModifyBookEndpoint {
     @Operation(
             tags = {
                     "Books"
             },
             responses = {
                     @ApiResponse(
-                            description = "Book is added",
-                            responseCode = "201",
+                            description = "Book is modified",
+                            responseCode = "200",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(
-                                            implementation = BookAddedResponse.class
+                                            implementation = BookModifiedResponse.class
                                     )
                             )
                     ),
                     @ApiResponse(
-                            description = "Fout in request body",
-                            responseCode = "400",
+                            description = "Book does not exist",
+                            responseCode = "404",
                             content = @Content(
                                     mediaType = MediaType.APPLICATION_JSON_VALUE,
                                     schema = @Schema(
@@ -38,10 +41,10 @@ public interface AddBookEndpoint {
                     )
             }
     )
-    @PostMapping(
-            value = "/books",
+    @PatchMapping(
+            value = "/books/{bookId}",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    ResponseEntity<Object> addBook(@RequestBody AddBookRequest request);
+    ResponseEntity<Object> modifyBook(@PathVariable UUID bookId, @RequestBody ModifyBookRequest request);
 }
