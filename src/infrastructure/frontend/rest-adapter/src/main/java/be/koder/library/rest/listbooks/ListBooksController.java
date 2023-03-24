@@ -12,7 +12,7 @@ public class ListBooksController implements ListBooksEndpoint {
 
     private final ListBooks listBooks;
 
-    public ListBooksController(ListBooks listBooks) {
+    public ListBooksController(final ListBooks listBooks) {
         this.listBooks = listBooks;
     }
 

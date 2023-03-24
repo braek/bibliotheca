@@ -14,12 +14,12 @@ public class ModifyBookController implements ModifyBookEndpoint {
 
     private final ModifyBook modifyBook;
 
-    public ModifyBookController(ModifyBook modifyBook) {
+    public ModifyBookController(final ModifyBook modifyBook) {
         this.modifyBook = modifyBook;
     }
 
     @Override
-    public ResponseEntity<Object> modifyBook(UUID bookId, ModifyBookRequest request) {
+    public ResponseEntity<Object> modifyBook(final UUID bookId, final ModifyBookRequest request) {
         final var presenter = new ModifyBookRestPresenter();
         final var theBookId = BookId.fromUuid(bookId);
         final var title = Title.fromString(request.title());
