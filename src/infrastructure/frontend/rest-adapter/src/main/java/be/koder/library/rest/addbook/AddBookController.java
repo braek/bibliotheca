@@ -12,11 +12,11 @@ public class AddBookController implements AddBookEndpoint {
 
     private final AddBook addBook;
 
-    public AddBookController(AddBook addBook) {
+    public AddBookController(final AddBook addBook) {
         this.addBook = addBook;
     }
 
-    public ResponseEntity<Object> addBook(AddBookRequest request) {
+    public ResponseEntity<Object> addBook(final AddBookRequest request) {
         final var isbn = Isbn.fromString(request.isbn());
         final var title = Title.fromString(request.title());
         final var author = Author.fromString(request.author());
