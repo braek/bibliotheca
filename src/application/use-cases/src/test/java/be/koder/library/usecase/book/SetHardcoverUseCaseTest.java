@@ -78,7 +78,7 @@ class SetHardcoverUseCaseTest {
         }
 
         @Override
-        public void set(URL hardcover) {
+        public void set(BookId bookId, URL hardcover) {
             setCalled = true;
         }
 
@@ -151,7 +151,7 @@ class SetHardcoverUseCaseTest {
         }
 
         @Override
-        public void set(URL hardcover) {
+        public void set(BookId bookId, URL hardcover) {
             fail();
         }
 
@@ -194,7 +194,7 @@ class SetHardcoverUseCaseTest {
         }
 
         @Override
-        public void set(URL hardcover) {
+        public void set(BookId bookId, URL hardcover) {
             fail();
         }
 
@@ -252,7 +252,7 @@ class SetHardcoverUseCaseTest {
         }
 
         @Override
-        public void set(URL hardcover) {
+        public void set(BookId bookId, URL hardcover) {
             fail();
         }
 
@@ -304,7 +304,7 @@ class SetHardcoverUseCaseTest {
         }
 
         @Override
-        public void set(URL hardcover) {
+        public void set(BookId bookId, URL hardcover) {
             fail();
         }
 
@@ -357,7 +357,7 @@ class SetHardcoverUseCaseTest {
         }
 
         @Override
-        public void set(URL hardcover) {
+        public void set(BookId bookId, URL hardcover) {
             fail();
         }
 

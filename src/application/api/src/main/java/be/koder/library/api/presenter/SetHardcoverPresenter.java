@@ -1,10 +1,12 @@
 package be.koder.library.api.presenter;
 
+import be.koder.library.vocabulary.book.BookId;
+
 import java.net.URL;
 
 public interface SetHardcoverPresenter {
 
-    void set(URL hardcover);
+    void set(BookId bookId, URL hardcover);
 
     void fileExtensionNotAllowed();
 

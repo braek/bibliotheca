@@ -21,7 +21,7 @@ public final class SetHardcoverEventPublisherDecorator implements SetHardcoverEv
     @Override
     public void set(BookId bookId, URL hardcover) {
         eventPublisher.publish(new HardcoverSet(bookId, hardcover));
-        presenter.set(hardcover);
+        presenter.set(bookId, hardcover);
     }
 
     @Override
