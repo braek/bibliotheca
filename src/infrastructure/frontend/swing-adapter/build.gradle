@@ -1,6 +1,0 @@
-dependencies {
-    implementation project(':api')
-    implementation project(':vocabulary')
-}
-
-description = 'swing-adapter'
