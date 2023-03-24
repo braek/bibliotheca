@@ -1,9 +1,6 @@
 package be.koder.library;
 
-import be.koder.library.api.AddBook;
-import be.koder.library.api.ModifyBook;
-import be.koder.library.api.RemoveBook;
-import be.koder.library.api.SetHardcover;
+import be.koder.library.api.*;
 import be.koder.library.domain.book.BookRepository;
 import be.koder.library.domain.book.HardcoverStore;
 import be.koder.library.domain.book.IsbnService;
@@ -11,6 +8,8 @@ import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.inmemory.InMemoryBookRepository;
 import be.koder.library.inmemory.InMemoryEventPublisher;
 import be.koder.library.inmemory.InMemoryHardcoverStore;
+import be.koder.library.query.book.BookArchive;
+import be.koder.library.query.book.ListBooksQuery;
 import be.koder.library.usecase.addbook.AddBookUseCase;
 import be.koder.library.usecase.modifybook.ModifyBookUseCase;
 import be.koder.library.usecase.removebook.RemoveBookUseCase;
@@ -34,6 +33,11 @@ public class BeanConfig {
     @Bean
     HardcoverStore hardcoverStore() {
         return new InMemoryHardcoverStore();
+    }
+
+    @Bean
+    ListBooks listBooks(BookArchive bookArchive) {
+        return new ListBooksQuery(bookArchive);
     }
 
     @Bean

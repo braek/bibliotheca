@@ -42,8 +42,7 @@ public interface RemoveBookEndpoint {
     )
     @DeleteMapping(
             value = "/books/{bookId}",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     ResponseEntity<Object> removeBook(@PathVariable UUID bookId);
 }
