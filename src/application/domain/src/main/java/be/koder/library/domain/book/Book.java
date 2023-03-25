@@ -8,9 +8,11 @@ import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Isbn;
 import be.koder.library.vocabulary.book.Title;
+import be.koder.library.vocabulary.file.Extension;
 import be.koder.library.vocabulary.file.Filename;
 
 import java.net.URL;
+import java.util.List;
 
 // Book = aggregate root
 public final class Book {
@@ -62,7 +64,13 @@ public final class Book {
     }
 
     public void setHardcover(final Filename filename, final byte[] data, final HardcoverStore hardcoverStore, final SetHardcoverEventPublisher eventPublisher) {
-        if (!HardcoverSettings.ALLOWED_EXTENSIONS.contains(filename.getExtension())) {
+        if (!List.of(
+                Extension.fromString("gif"),
+                Extension.fromString("jpe"),
+                Extension.fromString("jpeg"),
+                Extension.fromString("jpg"),
+                Extension.fromString("png")
+        ).contains(filename.getExtension())) {
             eventPublisher.fileExtensionNotAllowed();
             return;
         }
@@ -70,7 +78,8 @@ public final class Book {
             eventPublisher.fileEmpty();
             return;
         }
-        if (data.length > HardcoverSettings.MAX_FILE_SIZE) {
+        final var maxFileSize = 2 * 1000 * 1000;
+        if (data.length > maxFileSize) {
             eventPublisher.fileTooLarge();
             return;
         }

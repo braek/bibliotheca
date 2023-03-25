@@ -4,7 +4,6 @@ import be.koder.library.api.SetHardcover;
 import be.koder.library.api.presenter.SetHardcoverPresenter;
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookSnapshot;
-import be.koder.library.domain.book.HardcoverSettings;
 import be.koder.library.domain.book.event.HardcoverSet;
 import be.koder.library.test.BookObjectMother;
 import be.koder.library.test.MockBookRepository;
@@ -340,7 +339,7 @@ class SetHardcoverUseCaseTest {
         @BeforeEach
         void setup() {
             bookRepository.save(Book.fromSnapshot(book));
-            byte[] data = new byte[HardcoverSettings.MAX_FILE_SIZE + 1];
+            byte[] data = new byte[2 * 1000 * 1000 + 1];
             new Random().nextBytes(data);
             setHardcover.setHardcover(book.id(), filename, data, this);
         }
