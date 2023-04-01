@@ -1,6 +1,5 @@
 package be.koder.library.rest.listbooks;
 
-import be.koder.library.vocabulary.dto.BookListItem;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
