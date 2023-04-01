@@ -11,11 +11,11 @@ public final class AddBookRestPresenter extends RestPresenter implements AddBook
 
     @Override
     public void added(BookId bookId) {
-        response = ResponseEntity.status(HttpStatus.CREATED).body(new BookAddedResponse(bookId.getValue()));
+        setResponse(ResponseEntity.status(HttpStatus.CREATED).body(new BookAddedResponse(bookId.getValue())));
     }
 
     @Override
     public void isbnAlreadyExists() {
-        response = ResponseEntity.badRequest().body(new ErrorResponse("Het ISBN bestaat al."));
+        setResponse(ResponseEntity.badRequest().body(new ErrorResponse("Het ISBN bestaat al.")));
     }
 }

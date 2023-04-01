@@ -4,7 +4,11 @@ import org.springframework.http.ResponseEntity;
 
 public abstract class RestPresenter {
 
-    protected ResponseEntity<Object> response;
+    private ResponseEntity<Object> response;
+
+    protected void setResponse(ResponseEntity<Object> response) {
+        this.response = response;
+    }
 
     public ResponseEntity<Object> getResponse() {
         return response;

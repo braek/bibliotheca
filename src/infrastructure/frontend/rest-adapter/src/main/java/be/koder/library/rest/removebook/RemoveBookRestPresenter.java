@@ -11,11 +11,11 @@ public final class RemoveBookRestPresenter extends RestPresenter implements Remo
 
     @Override
     public void removed(BookId bookId) {
-        response = ResponseEntity.status(HttpStatus.OK).body(new BookRemovedResponse(bookId.getValue()));
+        setResponse(ResponseEntity.status(HttpStatus.OK).body(new BookRemovedResponse(bookId.getValue())));
     }
 
     @Override
     public void bookNotFound() {
-        response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Boek niet gevonden."));
+        setResponse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Boek niet gevonden.")));
     }
 }

@@ -11,11 +11,11 @@ public final class ModifyBookRestPresenter extends RestPresenter implements Modi
 
     @Override
     public void modified(BookId bookId) {
-        response = ResponseEntity.status(HttpStatus.OK).body(new BookModifiedResponse(bookId.getValue()));
+        setResponse(ResponseEntity.status(HttpStatus.OK).body(new BookModifiedResponse(bookId.getValue())));
     }
 
     @Override
     public void bookNotFound() {
-        response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Book does not exist."));
+        setResponse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Book does not exist.")));
     }
 }

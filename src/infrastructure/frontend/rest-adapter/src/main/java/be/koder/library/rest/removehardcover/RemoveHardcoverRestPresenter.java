@@ -14,16 +14,16 @@ public final class RemoveHardcoverRestPresenter extends RestPresenter implements
 
     @Override
     public void removed(BookId bookId, URL hardcover) {
-        response = ResponseEntity.status(HttpStatus.OK).body(new BookRemovedResponse(bookId.getValue()));
+        setResponse(ResponseEntity.status(HttpStatus.OK).body(new BookRemovedResponse(bookId.getValue())));
     }
 
     @Override
     public void bookNotFound() {
-        response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Boek bestaat niet."));
+        setResponse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Boek bestaat niet.")));
     }
 
     @Override
     public void bookHasNoHardcover() {
-        response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("Boek heeft geen hardcover."));
+        setResponse(ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("Boek heeft geen hardcover.")));
     }
 }
