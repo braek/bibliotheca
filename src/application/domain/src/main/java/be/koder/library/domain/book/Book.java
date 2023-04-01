@@ -2,6 +2,7 @@ package be.koder.library.domain.book;
 
 import be.koder.library.domain.book.event.BookAdded;
 import be.koder.library.domain.book.event.BookModified;
+import be.koder.library.domain.book.event.RemoveHardcoverEventPublisher;
 import be.koder.library.domain.book.event.SetHardcoverEventPublisher;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.vocabulary.book.Author;
@@ -13,6 +14,8 @@ import be.koder.library.vocabulary.file.Filename;
 
 import java.net.URL;
 import java.util.List;
+
+import static java.util.Objects.isNull;
 
 // Book = aggregate root
 public final class Book {
@@ -90,5 +93,14 @@ public final class Book {
         }
         this.hardcover = response.getUrl();
         eventPublisher.set(this.id, this.hardcover);
+    }
+
+    public void removeHardcover(RemoveHardcoverEventPublisher eventPublisher) {
+        if (isNull(hardcover)) {
+            eventPublisher.bookHasNoHardcover();
+            return;
+        }
+        eventPublisher.removed(id, hardcover);
+        hardcover = null;
     }
 }
