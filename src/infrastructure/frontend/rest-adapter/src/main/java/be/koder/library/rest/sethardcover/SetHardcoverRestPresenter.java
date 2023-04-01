@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.net.URL;
 
-public final class SetHardcoverRestPresenter implements RestPresenter, SetHardcoverPresenter {
-
-    private ResponseEntity<Object> response;
+public final class SetHardcoverRestPresenter extends RestPresenter implements SetHardcoverPresenter {
 
     @Override
     public void set(BookId bookId, URL hardcover) {
@@ -42,10 +40,5 @@ public final class SetHardcoverRestPresenter implements RestPresenter, SetHardco
     @Override
     public void bookNotFound() {
         response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Boek bestaat niet."));
-    }
-
-    @Override
-    public ResponseEntity<Object> getResponse() {
-        return response;
     }
 }

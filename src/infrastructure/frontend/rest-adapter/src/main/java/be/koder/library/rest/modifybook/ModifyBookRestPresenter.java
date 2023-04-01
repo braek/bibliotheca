@@ -7,9 +7,7 @@ import be.koder.library.vocabulary.book.BookId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public final class ModifyBookRestPresenter implements ModifyBookPresenter, RestPresenter {
-
-    private ResponseEntity<Object> response;
+public final class ModifyBookRestPresenter extends RestPresenter implements ModifyBookPresenter {
 
     @Override
     public void modified(BookId bookId) {
@@ -19,10 +17,5 @@ public final class ModifyBookRestPresenter implements ModifyBookPresenter, RestP
     @Override
     public void bookNotFound() {
         response = ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse("Book does not exist."));
-    }
-
-    @Override
-    public ResponseEntity<Object> getResponse() {
-        return response;
     }
 }

@@ -10,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.net.URL;
 
-public final class RemoveHardcoverRestPresenter implements RestPresenter, RemoveHardcoverPresenter {
-
-    private ResponseEntity<Object> response;
+public final class RemoveHardcoverRestPresenter extends RestPresenter implements RemoveHardcoverPresenter {
 
     @Override
     public void removed(BookId bookId, URL hardcover) {
@@ -27,10 +25,5 @@ public final class RemoveHardcoverRestPresenter implements RestPresenter, Remove
     @Override
     public void bookHasNoHardcover() {
         response = ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse("Boek heeft geen hardcover."));
-    }
-
-    @Override
-    public ResponseEntity<Object> getResponse() {
-        return response;
     }
 }

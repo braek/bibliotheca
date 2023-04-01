@@ -7,9 +7,7 @@ import be.koder.library.vocabulary.book.BookId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public final class AddBookRestPresenter implements RestPresenter, AddBookPresenter {
-
-    private ResponseEntity<Object> response;
+public final class AddBookRestPresenter extends RestPresenter implements AddBookPresenter {
 
     @Override
     public void added(BookId bookId) {
@@ -19,10 +17,5 @@ public final class AddBookRestPresenter implements RestPresenter, AddBookPresent
     @Override
     public void isbnAlreadyExists() {
         response = ResponseEntity.badRequest().body(new ErrorResponse("Het ISBN bestaat al."));
-    }
-
-    @Override
-    public ResponseEntity<Object> getResponse() {
-        return response;
     }
 }
