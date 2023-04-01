@@ -13,6 +13,7 @@ import be.koder.library.query.book.ListBooksQuery;
 import be.koder.library.usecase.addbook.AddBookUseCase;
 import be.koder.library.usecase.modifybook.ModifyBookUseCase;
 import be.koder.library.usecase.removebook.RemoveBookUseCase;
+import be.koder.library.usecase.removehardcover.RemoveHardcoverUseCase;
 import be.koder.library.usecase.sethardcover.SetHardcoverUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -58,5 +59,10 @@ public class BeanConfig {
     @Bean
     RemoveBook removeBook(BookRepository bookRepository, EventPublisher eventPublisher) {
         return new RemoveBookUseCase(bookRepository, eventPublisher);
+    }
+
+    @Bean
+    RemoveHardcover removeHardcover(BookRepository bookRepository, EventPublisher eventPublisher) {
+        return new RemoveHardcoverUseCase(bookRepository, eventPublisher);
     }
 }
