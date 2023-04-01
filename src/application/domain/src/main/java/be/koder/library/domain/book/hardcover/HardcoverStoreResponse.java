@@ -1,4 +1,4 @@
-package be.koder.library.domain.book;
+package be.koder.library.domain.book.hardcover;
 
 import java.net.URL;
 

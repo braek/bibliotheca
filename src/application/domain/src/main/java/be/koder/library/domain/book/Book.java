@@ -4,6 +4,7 @@ import be.koder.library.domain.book.event.BookAdded;
 import be.koder.library.domain.book.event.BookModified;
 import be.koder.library.domain.book.event.RemoveHardcoverEventPublisher;
 import be.koder.library.domain.book.event.SetHardcoverEventPublisher;
+import be.koder.library.domain.book.hardcover.HardcoverStore;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.vocabulary.book.Author;
 import be.koder.library.vocabulary.book.BookId;

@@ -3,7 +3,7 @@ package be.koder.library.usecase.sethardcover;
 import be.koder.library.api.SetHardcover;
 import be.koder.library.api.presenter.SetHardcoverPresenter;
 import be.koder.library.domain.book.BookRepository;
-import be.koder.library.domain.book.HardcoverStore;
+import be.koder.library.domain.book.hardcover.HardcoverStore;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.usecase.BufferedEventPublisher;
 import be.koder.library.usecase.UseCase;

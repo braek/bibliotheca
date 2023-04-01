@@ -1,7 +1,7 @@
 package be.koder.library.test;
 
-import be.koder.library.domain.book.HardcoverStore;
-import be.koder.library.domain.book.HardcoverStoreResponse;
+import be.koder.library.domain.book.hardcover.HardcoverStore;
+import be.koder.library.domain.book.hardcover.HardcoverStoreResponse;
 
 import java.net.MalformedURLException;
 import java.net.URL;

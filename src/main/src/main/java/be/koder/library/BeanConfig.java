@@ -2,8 +2,8 @@ package be.koder.library;
 
 import be.koder.library.api.*;
 import be.koder.library.domain.book.BookRepository;
-import be.koder.library.domain.book.HardcoverStore;
-import be.koder.library.domain.book.IsbnService;
+import be.koder.library.domain.book.hardcover.HardcoverStore;
+import be.koder.library.domain.book.isbn.IsbnService;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.inmemory.InMemoryBookRepository;
 import be.koder.library.inmemory.InMemoryEventPublisher;

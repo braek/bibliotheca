@@ -4,7 +4,7 @@ import be.koder.library.api.AddBook;
 import be.koder.library.api.presenter.AddBookPresenter;
 import be.koder.library.domain.book.Book;
 import be.koder.library.domain.book.BookRepository;
-import be.koder.library.domain.book.IsbnService;
+import be.koder.library.domain.book.isbn.IsbnService;
 import be.koder.library.domain.event.EventPublisher;
 import be.koder.library.usecase.BufferedEventPublisher;
 import be.koder.library.usecase.UseCase;
