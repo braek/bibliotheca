@@ -1,11 +1,11 @@
-package be.koder.library.api.presenter;
+package be.koder.library.domain.book.event;
 
 import be.koder.library.vocabulary.book.BookId;
 import be.koder.library.vocabulary.book.Isbn;
 
-public interface AddBookPresenter {
+public interface CreateBookEventPublisher {
 
-    void added(BookId bookId);
+    void created(BookId bookId);
 
     void isbnAlreadyExists(Isbn isbn);
 }

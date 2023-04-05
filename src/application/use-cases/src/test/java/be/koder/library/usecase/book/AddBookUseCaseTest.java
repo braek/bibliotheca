@@ -10,6 +10,7 @@ import be.koder.library.test.MockBookRepository;
 import be.koder.library.test.MockEventPublisher;
 import be.koder.library.usecase.addbook.AddBookUseCase;
 import be.koder.library.vocabulary.book.BookId;
+import be.koder.library.vocabulary.book.Isbn;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -76,7 +77,7 @@ class AddBookUseCaseTest {
         }
 
         @Override
-        public void isbnAlreadyExists() {
+        public void isbnAlreadyExists(Isbn isbn) {
             fail();
         }
     }
@@ -87,6 +88,7 @@ class AddBookUseCaseTest {
 
         private boolean isbnAlreadyExistsCalled;
         private BookSnapshot book = BookObjectMother.INSTANCE.cleanCode;
+        private Isbn isbn;
 
         @BeforeEach
         void setup() {
@@ -98,6 +100,7 @@ class AddBookUseCaseTest {
         @DisplayName("it should provide feedback")
         void feedbackProvided() {
             assertTrue(isbnAlreadyExistsCalled);
+            assertThat(isbn).isEqualTo(book.isbn());
         }
 
         @Override
@@ -106,8 +109,9 @@ class AddBookUseCaseTest {
         }
 
         @Override
-        public void isbnAlreadyExists() {
+        public void isbnAlreadyExists(Isbn isbn) {
             this.isbnAlreadyExistsCalled = true;
+            this.isbn = isbn;
         }
     }
 }

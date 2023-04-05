@@ -2,7 +2,7 @@ package be.koder.library.usecase.addbook;
 
 import be.koder.library.api.AddBook;
 import be.koder.library.api.presenter.AddBookPresenter;
-import be.koder.library.domain.book.Book;
+import be.koder.library.domain.book.BookCreator;
 import be.koder.library.domain.book.BookRepository;
 import be.koder.library.domain.book.isbn.IsbnService;
 import be.koder.library.domain.event.EventPublisher;
@@ -40,13 +40,12 @@ public final class AddBookUseCase implements UseCase<AddBookCommand, AddBookPres
     }
 
     private void executeBuffered(AddBookCommand command, AddBookPresenter presenter, EventPublisher eventPublisher) {
-        if (isbnService.exists(command.isbn())) {
-            presenter.isbnAlreadyExists();
-            return;
-        }
-        final var book = Book.createNew(command.isbn(), command.title(), command.author(), eventPublisher);
-        bookRepository.save(book);
-        final var bookId = book.takeSnapshot().id();
-        presenter.added(bookId);
+        final var bookCreator = new BookCreator(isbnService, bookRepository);
+        bookCreator.create(
+                command.isbn(),
+                command.title(),
+                command.author(),
+                new CreateBookEventPublisherDecorator(presenter, eventPublisher)
+        );
     }
 }

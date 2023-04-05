@@ -4,6 +4,7 @@ import be.koder.library.api.presenter.AddBookPresenter;
 import be.koder.library.rest.ErrorResponse;
 import be.koder.library.rest.RestPresenter;
 import be.koder.library.vocabulary.book.BookId;
+import be.koder.library.vocabulary.book.Isbn;
 import org.springframework.http.HttpStatus;
 
 public final class AddBookRestPresenter extends RestPresenter implements AddBookPresenter {
@@ -14,7 +15,7 @@ public final class AddBookRestPresenter extends RestPresenter implements AddBook
     }
 
     @Override
-    public void isbnAlreadyExists() {
+    public void isbnAlreadyExists(Isbn isbn) {
         setResponse(HttpStatus.BAD_REQUEST, new ErrorResponse("Het ISBN bestaat al."));
     }
 }

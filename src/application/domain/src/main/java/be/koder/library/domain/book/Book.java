@@ -35,9 +35,8 @@ public final class Book {
         this.hardcover = hardcover;
     }
 
-    public static Book createNew(final Isbn isbn, final Title title, final Author author, final EventPublisher eventPublisher) {
+    public static Book createNew(final Isbn isbn, final Title title, final Author author) {
         final var book = new Book(BookId.createNew(), isbn, title, author, null);
-        eventPublisher.publish(new BookAdded(book.id));
         return book;
     }
 
